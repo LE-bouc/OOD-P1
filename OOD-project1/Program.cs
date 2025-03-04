@@ -21,6 +21,7 @@ public class Program
                     case ConsoleKey.S: world.player.Move(1, 0); break;
                     case ConsoleKey.A: world.player.Move(0, -1); break;
                     case ConsoleKey.D: world.player.Move(0, 1); break;
+                    case ConsoleKey.E: world.player.PickUp(); break;
                     case ConsoleKey.Escape: return; 
                 }
             }

@@ -9,3 +9,4 @@
 /Users/michalkozicki/Documents/OOD-project1/OOD-project1/obj/Debug/net8.0/refint/OOD-project1.dll
 /Users/michalkozicki/Documents/OOD-project1/OOD-project1/obj/Debug/net8.0/OOD-project1.pdb
 /Users/michalkozicki/Documents/OOD-project1/OOD-project1/obj/Debug/net8.0/ref/OOD-project1.dll
+/Users/michalkozicki/Documents/OOD-project1/OOD-project1/obj/Debug/net8.0/OOD-project1.sourcelink.json
