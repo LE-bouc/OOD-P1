@@ -9,7 +9,7 @@ public class Player
 {
     public int[] position = { 0, 0 };
     private World world;
-    List<Item> inventory = new List<Item>();
+    public List<Item> inventory = new List<Item>();
     
     private Player_Stats stats;
     public Player_Stats Stats
@@ -67,7 +67,55 @@ public class Player
         
     }
 
-    private void Equip(Item new_item, int idx = -1)
+    public void Equip(int idx)
+    {
+        if (inventory.Count <= idx)
+        {
+            return;
+        }
+        Item new_item = inventory[idx];
+        if (new_item.twohanded)
+        {
+            EquipHandler(new_item);
+        }
+        Console.Clear(); // Temporarily hide map or other displays
+        Console.WriteLine("Where do you want to equip this item?");
+        Console.WriteLine("[L] - Left Hand");
+        Console.WriteLine("[R] - Right Hand");
+        Console.WriteLine("[U] - Unequip");
+        Console.WriteLine("[N] - Cancel");
+
+        char choice = char.ToUpper(Console.ReadKey(true).KeyChar); // Read input without displaying character
+        switch (choice)
+        {
+            case 'L': // left hand
+                EquipHandler(new_item, 0); 
+                Console.WriteLine("Item equipped to the Left Hand!");
+                break;
+            case 'R': // right hand
+                EquipHandler(new_item, 1); 
+                Console.WriteLine("Item equipped to the Right Hand!");
+                break;
+            case 'N': // cancel
+                Console.WriteLine("Equip action cancelled.");
+                return;
+            case 'U': //unequip
+                if(  world.Map[ position[0], position[1]].GetType() == typeof(Empty)){
+                    Console.WriteLine("Unequipping.");
+                    UnequipHandler(idx);
+                    return;
+                }
+                Console.WriteLine("Unable to equip, tile not empty.");
+                break;
+                
+            default: 
+                Console.WriteLine("Invalid input. Equip action cancelled.");
+                return;
+        }
+        
+    }
+
+    private void EquipHandler(Item new_item, int idx = -1)
     {
         //If equipping two-hander
         if (idx == -1)
@@ -82,6 +130,7 @@ public class Player
                         inventory.Add(item);
                     }
                 }
+
                 hands[0] = hands[1] = new_item;
                 stats.Add(new_item.player_effects);
                 inventory.Remove(new_item);
@@ -103,63 +152,13 @@ public class Player
             stats.Remove(hands[idx].player_effects);
             inventory.Remove(new_item);
             stats.Add(new_item.player_effects);
-            
+
         }
-        
-        if (hands[idx] == null)
-        {
-            hands[idx] = it;
-            stats.Add(it.player_effects);
-            return;
-        }
-        
-        if(it.)
-        
     }
-    private void Equip(Item new_item)
+
+    private void UnequipHandler(int idx)
     {
-
-        if (hands[0] == null)
-        {
-            hands[0] = new_item;
-            if (new_item.twohanded)
-            {
-                hands[1] = new_item;
-            }
-            stats.Add(new_item.player_effects);
-            return;
-        }
-
-        
-        if (new_item.twohanded)
-        {
-            if (hands[0].twohanded)
-            {
-                stats.Remove(hands[0].player_effects);
-            }
-            else
-            {
-                stats.Remove(hands[0].player_effects);
-                stats.Remove(hands[1].player_effects);
-            }
-            hands[0] = new_item;
-            hands[1] = new_item;
-        }
-        else
-        {
-            stats.Remove(hands[0].player_effects);
-            if (hands[0].twohanded)
-            {
-                hands[0] = new_item;
-            }
-            else
-            {
-                hands[0] = hands[1];
-                hands[1] = new_item;
-            }
-        }
-        stats.Add(new_item.player_effects);
-        return;
+        inventory.RemoveAt(idx);
     }
     
 }

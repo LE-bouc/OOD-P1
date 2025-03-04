@@ -158,6 +158,8 @@ public class World
     public void Display()
     {
         Console.Clear();
+        //Display player info
+        
         Console.WriteLine(
             "Information about the player:\n" +
             "|----------------------------------------|\n" +  
@@ -165,10 +167,28 @@ public class World
             "|----------------------------------------|\n" +
             $"| Hand 1: {utils.FormatItem(player.H1),-10} | Hand 2: {utils.FormatItem(player.H2),-10}|\n" +
             "|----------------------------------------|\n" +
-            player.Stats.ToString()
+            "Inventory:\n" +
+            "|----------------------------------------|\n"
         );
 
+        // Loop through the inventory and print each item
+        if (player.inventory.Count == 0)
+        {
+            Console.WriteLine("  (Empty Inventory)");
+        }
+        else
+        {
+            for (int i = 0; i < player.inventory.Count; i++)
+            {
+                Console.WriteLine($"  {i + 1}. {utils.FormatItem(player.inventory[i])}");
+            }
+        }
 
+        Console.WriteLine("|----------------------------------------|\n" + player.Stats.ToString());
+    
+
+
+        //Display Map
         for (int i = 0; i < x_boundary; i++)
         {
             for (int j = 0; j < y_boundary; j++)
