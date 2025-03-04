@@ -1,35 +1,21 @@
 namespace OOD_project1;
 
-public abstract class Item
+public abstract class Item : ITileable
 {
     public Player_Stats player_effects;
     public bool twohanded;
-    public Item(string itemName)
+    protected bool pickupable;
+    public bool Pickupable {get;}
+    public Item(string itemName,char c)
     { 
         Name = itemName;
         player_effects = new Player_Stats();
+        pickupable = true;
+        charRepresentation = c;
     }
     public string Name { get; protected set; }
     public virtual string GetName() => Name;
-}
-
-public class Empty : Item
-{
-    public Empty() : base("Empty Space")
-    {
-    }
-}
-
-public class Wall : Item
-{
-    public Wall() : base("Wall")
-    {
-    }
-}
-
-public class Coin : Item
-{
-    public Coin() : base("Coin"){}
+    public char charRepresentation { get; set; }
 }
 
 
@@ -37,7 +23,7 @@ public abstract class Weapon : Item
 {
     public int damage_value;
 
-    public Weapon(string _itemName) : base(_itemName)
+    public Weapon(string _itemName,char c) : base(_itemName,c)
     {
         player_effects = new Player_Stats();
     }
@@ -48,7 +34,7 @@ public abstract class Weapon : Item
 public abstract class ItemEffect : Item
 {
     protected Item _baseItem;
-    public ItemEffect(Item baseItem) : base(baseItem.Name)
+    public ItemEffect(Item baseItem) : base(baseItem.Name,baseItem.charRepresentation)
     {
         _baseItem = baseItem;
         player_effects = new Player_Stats();
@@ -62,7 +48,7 @@ public abstract class WeaponEffect : Weapon
     public Weapon _baseWeapon;
     public int damage_value;
 
-    public WeaponEffect(Weapon baseWeapon) : base(baseWeapon.Name)
+    public WeaponEffect(Weapon baseWeapon) : base(baseWeapon.Name,baseWeapon.charRepresentation)
     {
         _baseWeapon = baseWeapon;
         player_effects = new Player_Stats();
@@ -115,18 +101,41 @@ public class Gilded : WeaponEffect
 
 public class OldRabbiScroll : Item 
 {
-    public OldRabbiScroll() : base("Old Rabbi's Scroll")
+    public OldRabbiScroll() : base("Old Rabbi's Scroll", 'ℛ')
     {
         twohanded = false;
         player_effects.wisdom = 10;
         player_effects.aggression = -5;
         player_effects.luck = 10;
+        pickupable = false;
     }
 }
 
+public class BigBagONothin : Item 
+{
+    public BigBagONothin() : base("big bag o' nothin'", 'B')
+    {
+        twohanded = false;
+        pickupable = false;
+    }
+}
+
+public class TwoPrettyBestFriends : Item
+{
+    private bool one_of_them_gotta_be_ugly;
+    public TwoPrettyBestFriends() : base("TwoPrettyBestFriends", 'P')
+    {
+        twohanded = false;
+        pickupable = false;
+        one_of_them_gotta_be_ugly = true;
+    }
+}
+
+
+
 public class GreatAxe : Weapon
 {
-    public GreatAxe() : base("Great Axe")
+    public GreatAxe() : base("Great Axe", 'A')
     {
         twohanded = true;
         damage_value = 30;
@@ -135,7 +144,7 @@ public class GreatAxe : Weapon
 }
 public class Shield : Weapon
 {
-    public Shield() : base("Shield")
+    public Shield() : base("Shield", 'S')
     {
         twohanded = false;
         damage_value = 10;
@@ -146,7 +155,7 @@ public class Shield : Weapon
 
 public class Sword : Weapon
 {
-    public Sword() : base("Sword")
+    public Sword() : base("Sword", '/')
     {
         twohanded = false;
         damage_value = 10;

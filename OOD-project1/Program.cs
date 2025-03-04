@@ -39,7 +39,8 @@ public class Program
                     case ConsoleKey.Escape: return; 
                 }
             }
-            Thread.Sleep(50);
+            Thread.Sleep(5);
+            Console.Clear();
         }
     }
-}
+} 

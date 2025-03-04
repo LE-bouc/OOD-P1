@@ -11,6 +11,19 @@ public class Player
     private World world;
     public List<Item> inventory = new List<Item>();
     
+    public Dictionary<System.Type, int> currency_dict;
+    public int Coins
+    {
+        get => currency_dict[typeof(Coin)];
+        set => currency_dict[typeof(Coin)] = value;
+    }
+
+    public int Gold
+    {
+        get => currency_dict[typeof(Gold)];
+        set => currency_dict[typeof(Gold)] = value;
+    }
+
     private Player_Stats stats;
     public Player_Stats Stats
     {
@@ -34,6 +47,8 @@ public class Player
         stats = new Player_Stats();
         stats.strength = stats.dexterity = stats.health = stats.aggression = stats.wisdom = 5;
         world = w;
+        
+        currency_dict = utils.GetDerivedTypes<Currency>().ToDictionary(type => type, type => 0);
     }
 
 
@@ -54,16 +69,21 @@ public class Player
         }
         position[0] = new_x;
         position[1] = new_y;
+        if (world.Map[new_x, new_y] is Currency)
+        {
+            currency_dict[ world.Map[new_x, new_y].GetType() ]++;
+        }
     }
 
 
     public void PickUp()
     {
-        Item it = world.Map[position[0], position[1]];
-        if ( ! ( it is Wall || it is Empty) )
+        ITileable it = world.Map[position[0], position[1]];
+        if ( it is Item )
         {
-            inventory.Add(it);
+            inventory.Add((Item)it);
         }
+        world.Map[position[0], position[1]] = new Empty();
         
     }
 
@@ -78,14 +98,14 @@ public class Player
         {
             EquipHandler(new_item);
         }
-        Console.Clear(); // Temporarily hide map or other displays
+        Console.Clear(); // Temporarily hide map or other displays to allow for user input
         Console.WriteLine("Where do you want to equip this item?");
         Console.WriteLine("[L] - Left Hand");
         Console.WriteLine("[R] - Right Hand");
         Console.WriteLine("[U] - Unequip");
         Console.WriteLine("[N] - Cancel");
 
-        char choice = char.ToUpper(Console.ReadKey(true).KeyChar); // Read input without displaying character
+        char choice = char.ToUpper(Console.ReadKey(true).KeyChar);
         switch (choice)
         {
             case 'L': // left hand

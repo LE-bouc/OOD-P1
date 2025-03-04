@@ -1,0 +1,15 @@
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\bin\Release\net8.0\OOD-project1.deps.json
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\bin\Release\net8.0\OOD-project1.dll
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\bin\Release\net8.0\OOD-project1.pdb
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.AssemblyInfoInputs.cache
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.AssemblyInfo.cs
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.csproj.CoreCompileInputs.cache
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.sourcelink.json
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.dll
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\refint\OOD-project1.dll
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.pdb
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\ref\OOD-project1.dll
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\bin\Release\net8.0\OOD-project1.exe
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\bin\Release\net8.0\OOD-project1.runtimeconfig.json
+C:\Users\micha\RiderProjects\OOD-P1\OOD-project1\obj\Release\net8.0\OOD-project1.genruntimeconfig.cache
